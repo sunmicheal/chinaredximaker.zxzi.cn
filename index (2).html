@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZimoSmallxiEarn</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src='//niphaumeenses.net/vignette.min.js' data-zone='8650323' data-sdk='show_8650323'></script>
+</head>
+
+<body>
+  <div class="main-container">
+    <!-- 动态标题 -->
+    <div class="animated-title">
+      <span style="--i: 1;">Z</span><span style="--i: 2;">i</span><span style="--i: 3;">m</span><span style="--i: 4;">o</span><span style="--i: 5;">S</span><span style="--i: 6;">m</span><span style="--i: 7;">a</span><span style="--i: 8;">l</span><span style="--i: 9;">l</span><span style="--i: 10;">x</span><span style="--i: 11;">i</span><span style="--i: 12;">E</spa><span style="--i: 13;">a</span><span style="--i: 14;">r</span><span style="--i: 15;">n</span>
+    </div>
+    <!-- 余额部分 -->
+    <div class="balance-box">
+      <h2>Balance</h2>
+      <p id="balance">$0.00</p>
+      <div class="balance-buttons">
+        <button class="btn" id="withdraw-btn">Withdraw</button>
+        <button class="btn" id="history-btn">History</button>
+        <button class="btn" id="settings-btn">Settings</button>
+      </div>
+    </div>
+    <!-- 选项按钮 -->
+    <div class="option">
+      <button class="option-btn" id="watch-ads-btn">Watch Ads</button>
+    </div>
+    <div class="option">
+      <button class="option-btn" id="post-task-btn">Post Task</button>
+    </div>
+    <div class="option">
+      <button class="option-btn" id="partner-btn">Partner</button>
+    </div>
+    <!-- 后台系统按钮 -->
+    <div class="option">
+      <button class="option-btn" id="admin-btn">后台系统</button>
+    </div>
+    <!-- 底部导航栏 -->
+    <div class="bottom-nav">
+      <button class="nav-btn" id="home-btn">Home</button>
+      <button class="nav-btn" id="tasks-btn">Tasks</button>
+      <button class="nav-btn" id="profile-btn">Profile</button>
+    </div>
+  </div>
+  <!-- 提现弹窗 -->
+  <div id="withdraw-modal" class="modal">
+    <div class="modal-content">
+      <button id="close-withdraw-modal-btn" class="close-btn">X</button>
+      <h3>Enter Amount to Withdraw</h3>
+      <input type="number" id="withdraw-amount" placeholder="Enter Amount" />
+      <button id="confirm-withdraw-btn">Confirm Withdraw</button>
+      <p id="transaction-id"></p>
+    </div>
+  </div>
+  <!-- 历史记录弹窗 -->
+  <div id="history-modal" class="modal">
+    <div class="modal-content">
+      <button id="close-history-modal-btn" class="close-btn">X</button>
+      <h3>Withdrawal History</h3>
+      <div id="history-list">
+        <!-- 提现记录将显示在此处 -->
+      </div>
+    </div>
+  </div>
+  <!-- 设置Payeer账户弹窗 -->
+  <div id="settings-modal" class="modal">
+    <div class="modal-content">
+      <button id="close-settings-modal-btn" class="close-btn">X</button>
+      <h3>Set Payeer Account</h3>
+      <input type="text" id="payeer-account" placeholder="Enter Payeer Account (P...)" />
+      <button id="save-settings-btn">Save</button>
+    </div>
+  </div>
+  <!-- 后台系统弹窗 -->
+  <div id="admin-modal" class="modal">
+    <div class="modal-content">
+      <button id="close-admin-modal-btn" class="close-btn">X</button>
+      <h3>后台系统</h3>
+      <p>Manage withdrawal records and mark as paid/unpaid:</p>
+      <div>
+        <input type="text" id="transaction-id-input" placeholder="Enter Transaction ID" />
+        <button id="search-transaction-btn">Search</button>
+      </div>
+      <!-- 交易记录 -->
+      <div id="transaction-records">
+        <!-- 交易将显示在此处 -->
+      </div>
+      <h3>Withdrawal Status</h3>
+      <div id="history-status">
+        <!-- 历史更新将显示状态 -->
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

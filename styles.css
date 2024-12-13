@@ -1,0 +1,429 @@
+/* 整体布局与背景 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f8ff; /* 淡蓝色背景 */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  animation: fadeInBackground 0.5s ease-out; /* 背景淡入动画 */
+}
+
+.main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* 标题动画 */
+.animated-title {
+  font-size: 36px; /* 调整标题字体大小 */
+  font-weight: bold;
+  color: #0077be; /* 标题蓝色 */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  animation: fadeInTitle 1s ease-in-out forwards;
+}
+
+.animated-title span {
+  display: inline-block;
+  animation: letterAnimation 0.5s ease-out both;
+  animation-delay: calc(0.1s * var(--i));
+}
+
+@keyframes fadeInTitle {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes letterAnimation {
+  0% {
+    transform: translateY(-50%) rotateY(-90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) rotateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInBackground {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 余额框样式 */
+.balance-box {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  width: 300px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.balance-box:hover {
+  transform: translateY(-5px);
+}
+
+h2 {
+  color: #0077be;
+  margin-top: 0;
+}
+
+#balance {
+  font-size: 30px; /* 调整余额字体大小 */
+  color: #0077be;
+  font-weight: bold;
+}
+
+.balance-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.btn {
+  background-color: #0077be;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #005599;
+  transform: scale(1.05);
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+/* 选项按钮样式 */
+.option {
+  margin-bottom: 15px;
+}
+
+.option-btn {
+  background-color: #fff;
+  color: #0077be;
+  border: 2px solid #0077be;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 200px;
+  text-align: left;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.option-btn:hover {
+  background-color: #0077be;
+  color: #fff;
+  border-color: #005599;
+  transform: translateY(-3px);
+}
+
+.option-btn:active {
+  transform: translateY(1px);
+}
+
+/* 底部导航栏样式 */
+.bottom-nav {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.nav-btn {
+  background-color: transparent;
+  border: none;
+  color: #0077be;
+  font-size: 18px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-btn:hover {
+  color: #005599;
+}
+
+.nav-btn:active {
+  color: #003366;
+}
+
+/* 弹窗通用样式 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px; /* 弹窗默认宽度 */
+  height: auto;
+  overflow: hidden; /* 隐藏溢出内容，避免出现滚动条（除了设置了滚动条的区域） */
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  animation: fadeInModal 0.3s ease-out;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 0;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: #000;
+}
+
+/* 提现弹窗样式 */
+#withdraw-modal input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#confirm-withdraw-btn {
+  background-color: #0077be;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+#confirm-withdraw-btn:hover {
+  background-color: #005599;
+  transform: scale(1.05);
+}
+
+#confirm-withdraw-btn:active {
+  transform: scale(0.95);
+}
+
+#transaction-id {
+  color: #0077be;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+/* 历史记录弹窗样式 */
+#history-modal {
+  width: 300px; /* 历史记录弹窗宽度，可展示更多内容 */
+}
+
+#history-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.history-record-card {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.history-record-card:hover {
+  transform: translateY(-1px);
+}
+
+.history-record p {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.payment-status {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+/* 设置弹窗样式 */
+#settings-modal input[type="text"] {
+  width: 200px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 5px solid #A8AFFF;
+  border-radius: 10px;
+  font-size: 10px;
+}
+
+#save-settings-btn {
+  background-color: #0077be;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+#save-settings-btn:hover {
+  background-color: #005599;
+  transform: scale(1.05);
+}
+
+#save-settings-btn:active {
+  transform: scale(0.95);
+}
+
+/* 后台系统弹窗样式 */
+#admin-modal {
+  width: 400px;
+}
+
+#admin-modal h3 {
+  color: #0077be;
+}
+
+#transaction-id-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#search-transaction-btn {
+  background-color: #0077be;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+#search-transaction-btn:hover {
+  background-color: #005599;
+  transform: scale(1.05);
+}
+
+#search-transaction-btn:active {
+  transform: scale(0.95);
+}
+
+#transaction-records {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#history-status {
+  margin-top: 15px;
+  color: #0077be;
+  font-weight: bold;
+}
+
+.mark-paid-btn {
+  background-color: #0077be;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 10px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.mark-paid-btn:hover {
+  background-color: #005599;
+  transform: scale(1.05);
+}
+
+.mark-paid-btn:active {
+  transform: scale(0.95);
+}
+
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInAndScaleHistoryModal {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+#history-modal {
+  animation: fadeInAndScaleHistoryModal 0.3s ease-out;
+}
+
+#history-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+#history-list::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+#history-list::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 5px;
+}
+
+#history-list::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}

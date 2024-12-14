@@ -237,30 +237,58 @@ function toggleTransactionStatus(transaction) {
     }
 }
 
-// 点击看广告按钮增加余额（优化后的逻辑，通过标志位控制只有广告展示完成后才增加余额）
-watchAdsBtn.addEventListener('click', () => {
+// 模拟广告展示函数，返回一个Promise
+function showAd() {
+    return new Promise((resolve, reject) => {
+        // 模拟广告成功率：70%成功，30%失败
+        const success = Math.random() < 0.7;
+        setTimeout(() => {
+            if (success) {
+                resolve();
+            } else {
+                reject(new Error('广告加载失败'));
+            }
+        }, 500); // 假设广告展示需要0.5秒完成
+    });
+}
+
+// 点击看广告按钮增加余额（优化后的逻辑，只有成功观看广告才增加余额，且倒计时结束自动关闭广告）
+watchAdsBtn.addEventListener('click', async () => {
     if (isAdShowing) {
-        
+        alert('广告正在展示，请稍候...');
+        return;
     }
-    isAdShowing = true; // 设置广告正在展示标志为true
-    const showAd = () => {
-        show_8650323().then(() => {
-            // 广告展示成功后，增加余额
+    isAdShowing = true;
+    watchAdsBtn.disabled = true;
+
+    let countdown = 15; // 广告倒计时时间，单位：秒
+    const countdownInterval = setInterval(() => {
+        console.log(`广告倒计时：${countdown}秒`);
+        countdown--;
+        if (countdown === 0) {
+            clearInterval(countdownInterval);
+            isAdShowing = false;
+            watchAdsBtn.disabled = false;
+            console.log('广告已关闭');
+        }
+    }, 1000);
+
+    try {
+        for (let i = 0; i < 10; i++) {
+            await show_8650323();
             balance += 1;
-            // 更新页面上的余额显示
             updateBalanceDisplay();
-            // 将更新后的余额数据保存到本地存储
             saveBalanceToLocalStorage();
-            // 可以添加更多成功后的提示信息或者相关业务逻辑，比如记录观看广告的次数等（这里简单示例，可按需扩展）
-            console.log('观看广告成功，余额已增加，当前余额为：', balance);
-            isAdShowing = false; // 广告展示完成，重置标志位为false
-        }).catch((error) => {
-            // 如果广告展示出现错误，进行相应的错误处理，比如提示用户稍后再试等
-            console.error('观看广告出现错误：', error);
-            isAdShowing = false; // 出现错误也重置标志位
-        });
-    };
-    showAd();
+            console.log('观看广告成功，当前余额:', balance);
+        }
+    } catch (error) {
+        console.error('观看广告失败:', error);
+        alert('广告展示失败，请稍后重试。');
+    } finally {
+        clearInterval(countdownInterval); // 确保在广告获取完成（成功或失败）后清除倒计时定时器
+        isAdShowing = false;
+        watchAdsBtn.disabled = false;
+    }
 });
 
 // 将余额数据保存到本地存储的函数
